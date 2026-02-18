@@ -49,6 +49,14 @@ Loss = -mean( y·log(p) + (1-y)·log(1-p) )
 
 Utilização de K-Fold Cross-Validation, Mini-Batches durante a fase de treinamento e shuffle dos dados para garantia da aleatoriedade, além de L2 Regularization nos pesos. 
 
+# Resultados por Experimento 
+
+| Experimentos | Acurácia  | 
+|--------------|----------|
+| Experimento 1| 80.26%   |
+| Experimento 2| 82.50%   |
+
+
 # Referências 
 
 1. Dataset: https://www.kaggle.com/datasets/nvarisha/heart-attack-data-analysis/data
