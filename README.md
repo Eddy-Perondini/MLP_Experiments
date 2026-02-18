@@ -37,6 +37,7 @@ Sigmoid(x) = 1 / (1 + exp(-x))
 
 ## Gradientes:
 ReLU'(x) = 1 se x > 0, senão 0
+
 Sigmoid'(x) = x * (1 - x)
 
 # Função de Perda 
