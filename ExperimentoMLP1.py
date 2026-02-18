@@ -1,13 +1,11 @@
 import numpy as np 
 import MLP 
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import KFold
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt 
 import time 
-import matplotlib 
-matplotlib.use("TkAgg")
 
 start = time.time()
 
@@ -15,68 +13,64 @@ caminho = r'/home/EddyPerondini/Documentos/Mestrado/Aplicações/Bancos de Dados
 
 df_heartattack = pd.read_csv(caminho) 
 
-#print(df_heartattack.columns)
-
 #Definindo as variáveis X (atributos) e y (target)
 
 X = df_heartattack.iloc[:, :-1].values
 y = df_heartattack.iloc[:, -1].values.reshape(-1,1)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 67)
+#Implementando K-Fold Cross Validation
 
-#Normalizando os dados para aplicar à rede 
+kf = KFold(n_splits = 5, shuffle = True, random_state = 67)
+scaler = StandardScaler()
 
-mean = X_train.mean(axis=0)
-std  = X_train.std(axis=0) + 1e-8
+resultados_acc = []
 
-X_train = (X_train - mean) / std
-X_test  = (X_test  - mean) / std
+for i, (train_index, val_index) in enumerate(kf.split(X)): 
 
-#Criando a rede 
+    X_train, X_val = X[train_index], X[val_index]
+    y_train, y_val = y[train_index], y[val_index]
 
-np.random.seed(67)
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_val_scaled = scaler.transform(X_val)
 
-mlp = MLP.MLP(
-    input_size = 13, 
-    hidden_size = 64, 
-    output_size = 1
+    np.random.seed(67)
+
+    mlp = MLP.MLP(
+        input_size = 13, 
+        hidden_size = 64, 
+        output_size = 1
     )
 
-losses, accuracies = mlp.train(X_train, y_train, epochs = 5000, learning_rate = 0.001)
+    losses, accuracies = mlp.train(X_train_scaled, y_train, epochs = 200, learning_rate = 0.001)
 
-pred = mlp.predict(X_test)
-acc = (pred == y_test).mean()
+    pred_val = mlp.predict(X_val_scaled)
+    
+    acc_fold = (pred_val == y_val).mean()
+    resultados_acc.append(acc_fold)
+
+    print(f'Fold {i+1}, Acurácia: {acc_fold:.4f}')
 
 end = time.time()
 
 intervalo = end - start
 
 print(f'Tempo (s): {intervalo}')
-print("Acurácia:", acc)
-print("Classes Preditas pelo Modelo:", pred.ravel())
-print("Classes Verdadeiras:", y_test.ravel())
+print(f'\nAcurácia Média Final: {np.mean(resultados_acc):.4f}')
 
 #Gerando a visualização da função de perda conforme as épocas 
 
 plt.figure(figsize=(10,8))
 
 plt.plot(losses, color = 'blue', label = 'Perda')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-plt.grid(True)
-
-plt.figure(figsize=(10,8))
-
 plt.plot(accuracies, color = 'orange', label = 'Acurácia')
 plt.xlabel('Epochs')
-plt.ylabel('Accuracy')
+plt.ylabel('Loss/Accuracy')
 plt.legend()
 plt.grid(True)
 
 #Gerando a visualização da matriz de confusão
 
-cm = confusion_matrix(y_test, pred)
+cm = confusion_matrix(y_val, pred_val)
 
 display = ConfusionMatrixDisplay(cm)
 
