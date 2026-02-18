@@ -8,6 +8,12 @@ A rede possui três camadas:
 
 3. Camada de Saída (Sigmoid)
 
+| Arquitetura   | Valores | 
+|--------------|----------|
+| Input Size   | 13       |
+| Hidden Size  | 64       |
+| Output Size  | 1        | 
+
 ## Equações:
 
 z1 = X · W1 + b1
