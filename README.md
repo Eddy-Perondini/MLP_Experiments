@@ -61,6 +61,7 @@ Utilização de K-Fold Cross-Validation, Mini-Batches durante a fase de treiname
 |--------------|----------|
 | Experimento 1| 80.26%   |
 | Experimento 2| 82.50%   |
+| Experimento 3| 89.13%   |
 
 
 # Referências 
