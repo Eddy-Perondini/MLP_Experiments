@@ -53,7 +53,9 @@ Loss = -mean( y·log(p) + (1-y)·log(1-p) )
 
 # Adicionais
 
-Utilização de K-Fold Cross-Validation, Mini-Batches durante a fase de treinamento e shuffle dos dados para garantia da aleatoriedade, além de L2 Regularization nos pesos. 
+**EXPERIMENTOMLP1.PY:** Utilização de K-Fold Cross-Validation, Mini-Batches durante a fase de treinamento e shuffle dos dados para garantia da aleatoriedade, além de L2 Regularization nos pesos. 
+
+**EXPERIMENTOMLP2.PY:** Salvamento da MLP pré-treinada no arquivo "ExperimentoMLP1.py" como arquivo .pkl e retreinamento, novamente, em uma nova base de dados, isto é, aplicação de Aprendizado Online para melhora da performance do modelo de redes neurais.  
 
 # Resultados por Experimento 
 
