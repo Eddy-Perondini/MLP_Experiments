@@ -1,5 +1,6 @@
 import numpy as np 
 import MLP 
+import pickle as pkl 
 import pandas as pd
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
@@ -53,6 +54,11 @@ for i, (train_index, val_index) in enumerate(kf.split(X)):
 end = time.time()
 
 intervalo = end - start
+
+#Salvando o modelo em .pkl ===> passando para a etapa de teste num novo dataset 
+
+with open('mlp_HeartAttack.pkl', 'wb') as f: 
+    pkl.dump(mlp, f)
 
 print(f'Tempo (s): {intervalo}')
 print(f'\nAcurácia Média Final: {np.mean(resultados_acc):.4f}')
