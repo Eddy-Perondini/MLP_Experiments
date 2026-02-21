@@ -10,7 +10,7 @@ A rede possui três camadas:
 
 | Arquitetura   | Valores | 
 |--------------|----------|
-| Input Size   | 13       |
+| Input Size   | 11       |
 | Hidden Size  | 64       |
 | Output Size  | 1        | 
 
@@ -64,6 +64,7 @@ Loss = -mean( y·log(p) + (1-y)·log(1-p) )
 | Experimento 1| 80.26%   |
 | Experimento 2| 82.50%   |
 | Experimento 3| 89.13%   |
+| Experimento 4| 89.57%   |
 
 
 # Referências 
