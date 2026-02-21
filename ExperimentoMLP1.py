@@ -14,6 +14,8 @@ caminho = r'/home/EddyPerondini/Documentos/Mestrado/Aplicações/Bancos de Dados
 
 df_heartattack = pd.read_csv(caminho) 
 
+df_heartattack = df_heartattack.drop(columns = ['ca','thal'])
+
 #Definindo as variáveis X (atributos) e y (target)
 
 X = df_heartattack.iloc[:, :-1].values
@@ -37,7 +39,7 @@ for i, (train_index, val_index) in enumerate(kf.split(X)):
     np.random.seed(67)
 
     mlp = MLP.MLP(
-        input_size = 13, 
+        input_size = 11, 
         hidden_size = 64, 
         output_size = 1
     )

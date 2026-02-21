@@ -13,6 +13,8 @@ file_path = "/home/EddyPerondini/Documentos/Mestrado/Aplicações/Bancos de Dado
 
 df = pd.read_csv(file_path)
 
+df = df.drop(columns = ['ca','thal'])
+
 #Aplicando Label Encoding para variáveis categóricas
 
 encoding = LabelEncoder()
