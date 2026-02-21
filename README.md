@@ -66,6 +66,7 @@ Loss = -mean( y·log(p) + (1-y)·log(1-p) )
 | Experimento 3| 89.13%   |
 | Experimento 4| 89.57%   |
 
+<img width="377" height="375" alt="image" src="https://github.com/user-attachments/assets/510a32b5-de33-4b49-a960-f55003de11d6" />
 
 # Referências 
 
