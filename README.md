@@ -57,6 +57,8 @@ Loss = -mean( y·log(p) + (1-y)·log(1-p) )
 
 **EXPERIMENTOMLP2.PY:** Salvamento da MLP pré-treinada no arquivo "ExperimentoMLP1.py" como arquivo .pkl e retreinamento, novamente, em uma nova base de dados, isto é, aplicação de Aprendizado Online para melhora da performance do modelo de redes neurais.  
 
+**EXPERIMENTO 4:** Mudança na base de dados de treinamento original, remoção de duas colunas de atributos que não contribuiem tanto para o processo de aprendizado e aplicando o aprendizado online nessa base. 
+
 # Resultados por Experimento 
 
 | Experimentos | Acurácia  | 
